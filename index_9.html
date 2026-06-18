@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Lama Alamoudi — KAUST Academy AI Specialization Track</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F5F4FB;
+    --paper-2:#FFFFFF;
+    --ink:#1B1B2F;
+    --ink-soft:#4B4B63;
+    --muted:#8B8BA6;
+    --line:#E7E5F1;
+    --violet:#5B4FCF;
+    --violet-soft:#EEEBFB;
+    /* stage / cluster colours */
+    --c1:#4F6BED; /* Classical ML */
+    --c2:#13A597; /* Deep Learning */
+    --c3:#DE9B33; /* Unsupervised */
+    --c4:#D45D87; /* Assessment */
+    --display:'Fraunces',Georgia,serif;
+    --body:'IBM Plex Sans',system-ui,sans-serif;
+    --mono:'IBM Plex Mono',ui-monospace,monospace;
+    --maxw:1140px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--body);
+    font-weight:400;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+  a{color:inherit;text-decoration:none;}
+  ::selection{background:var(--violet);color:#fff;}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px;}
+
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:.72rem;
+    letter-spacing:.22em;
+    text-transform:uppercase;
+    color:var(--violet);
+    font-weight:500;
+  }
+
+  /* ---------- top bar ---------- */
+  .topbar{
+    position:sticky;top:0;z-index:40;
+    background:rgba(245,244,251,.82);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .topbar .wrap{display:flex;align-items:center;justify-content:space-between;height:62px;}
+  .brand{font-family:var(--display);font-weight:600;font-size:1.02rem;letter-spacing:.01em;}
+  .brand b{color:var(--violet);}
+  .navlinks{display:flex;gap:26px;font-family:var(--mono);font-size:.78rem;letter-spacing:.04em;}
+  .navlinks a{color:var(--ink-soft);transition:color .2s;}
+  .navlinks a:hover{color:var(--violet);}
+  @media(max-width:720px){.navlinks{display:none;}}
+
+  /* ---------- hero ---------- */
+  .hero{padding:74px 0 30px;}
+  .hero .wrap{
+    display:grid;grid-template-columns:1.05fr .95fr;gap:54px;align-items:center;
+  }
+  .hero-kicker{display:flex;align-items:center;gap:12px;margin-bottom:22px;}
+  .hero-kicker .dot{width:7px;height:7px;border-radius:50%;background:var(--violet);}
+  h1{
+    font-family:var(--display);
+    font-weight:600;
+    font-size:clamp(2.5rem,5.4vw,3.85rem);
+    line-height:1.04;
+    letter-spacing:-.01em;
+    margin:0 0 8px;
+  }
+  h1 .ln{display:block;}
+  h1 .accent{font-style:italic;font-weight:500;color:var(--violet);}
+  .role{
+    font-family:var(--mono);
+    font-size:.86rem;
+    color:var(--ink-soft);
+    letter-spacing:.02em;
+    margin:18px 0 22px;
+    line-height:1.7;
+  }
+  .role span{color:var(--ink);font-weight:500;}
+  .lead{
+    font-size:1.06rem;
+    color:var(--ink-soft);
+    max-width:46ch;
+    margin:0 0 30px;
+  }
+  .cta-row{display:flex;flex-wrap:wrap;gap:12px;}
+  .btn{
+    font-family:var(--mono);font-size:.8rem;letter-spacing:.03em;
+    padding:11px 18px;border-radius:8px;
+    display:inline-flex;align-items:center;gap:8px;
+    transition:transform .18s ease, box-shadow .18s ease, background .18s;
+  }
+  .btn-solid{background:var(--ink);color:#fff;}
+  .btn-solid:hover{background:var(--violet);transform:translateY(-2px);box-shadow:0 10px 24px -12px var(--violet);}
+  .btn-ghost{border:1px solid var(--line);color:var(--ink-soft);background:var(--paper-2);}
+  .btn-ghost:hover{border-color:var(--violet);color:var(--violet);transform:translateY(-2px);}
+
+  /* ---------- hero embedding visual ---------- */
+  .embed{position:relative;width:100%;max-width:460px;margin:0 auto;aspect-ratio:1/1;}
+  .embed svg{width:100%;height:100%;overflow:visible;}
+  .portrait{
+    position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+    width:50%;aspect-ratio:4/5;border-radius:16px;
+    /* ---- YOUR PHOTO loads from Images/photo.jpg (see the <img> below).
+         Until it's found, the "LA" monogram shows on this gradient. ---- */
+    background:
+      radial-gradient(120% 120% at 30% 20%, #fff 0%, rgba(255,255,255,0) 55%),
+      conic-gradient(from 200deg, var(--c1), var(--c2), var(--c3), var(--c4), var(--c1));
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 22px 50px -22px rgba(27,27,47,.5), inset 0 0 0 6px #fff;
+    z-index:3;
+  }
+  .portrait span{
+    font-family:var(--display);font-weight:600;font-size:clamp(2rem,5vw,2.7rem);
+    color:#fff;letter-spacing:.02em;text-shadow:0 2px 14px rgba(27,27,47,.35);
+  }
+  .portrait-img{
+    position:absolute;inset:6px;
+    width:calc(100% - 12px);height:calc(100% - 12px);
+    object-fit:cover;border-radius:11px;z-index:2;display:block;
+  }
+
+  @media(max-width:860px){
+    .hero .wrap{grid-template-columns:1fr;gap:40px;}
+    .embed{order:-1;max-width:300px;}
+  }
+
+  /* ---------- section shell ---------- */
+  section{padding:64px 0;}
+  .sec-head{margin-bottom:40px;max-width:60ch;}
+  .sec-head h2{
+    font-family:var(--display);font-weight:600;
+    font-size:clamp(1.7rem,3.4vw,2.3rem);
+    letter-spacing:-.01em;margin:14px 0 10px;line-height:1.1;
+  }
+  .sec-head p{color:var(--ink-soft);margin:0;font-size:1.02rem;}
+
+  /* ---------- about ---------- */
+  .about{background:var(--paper-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .about .wrap{display:grid;grid-template-columns:.8fr 1.2fr;gap:48px;align-items:start;}
+  .about-meta{font-family:var(--mono);font-size:.8rem;line-height:2;color:var(--ink-soft);}
+  .about-meta div{display:flex;gap:10px;border-bottom:1px dashed var(--line);padding:7px 0;}
+  .about-meta .k{color:var(--muted);min-width:96px;}
+  .about-meta .v{color:var(--ink);}
+  .about-body p{font-size:1.1rem;color:var(--ink-soft);margin:0 0 16px;}
+  .about-body p strong{color:var(--ink);font-weight:600;}
+  @media(max-width:760px){.about .wrap{grid-template-columns:1fr;gap:30px;}}
+
+  /* ---------- skills ---------- */
+  .skill-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;}
+  .skill-card{
+    background:var(--paper-2);border:1px solid var(--line);border-radius:14px;
+    padding:22px 22px 20px;transition:border-color .2s, transform .2s, box-shadow .2s;
+  }
+  .skill-card:hover{border-color:var(--violet);transform:translateY(-3px);box-shadow:0 16px 34px -24px rgba(91,79,207,.55);}
+  .skill-card .num{font-family:var(--mono);font-size:.72rem;color:var(--violet);letter-spacing:.1em;}
+  .skill-card h3{font-family:var(--display);font-weight:600;font-size:1.16rem;margin:6px 0 14px;letter-spacing:-.01em;}
+  .skill-card .sc-note{font-size:.88rem;color:var(--ink-soft);margin:-6px 0 14px;line-height:1.5;}
+  .skill-card.wide{grid-column:1/-1;}
+  .chips{display:flex;flex-wrap:wrap;gap:7px;}
+  .chip{
+    font-family:var(--mono);font-size:.72rem;color:var(--ink-soft);
+    background:var(--paper);border:1px solid var(--line);
+    padding:5px 10px;border-radius:6px;letter-spacing:.01em;
+  }
+  @media(max-width:680px){.skill-grid{grid-template-columns:1fr;}}
+
+  /* ---------- journey / projects ---------- */
+  .stage{margin-bottom:46px;}
+  .stage-head{display:flex;align-items:baseline;gap:16px;margin-bottom:22px;padding-bottom:14px;border-bottom:1px solid var(--line);}
+  .stage-no{font-family:var(--mono);font-size:.82rem;font-weight:600;letter-spacing:.05em;color:var(--stage);}
+  .stage-title{font-family:var(--display);font-weight:600;font-size:1.5rem;letter-spacing:-.01em;}
+  .stage-sub{font-size:.96rem;color:var(--ink-soft);margin-left:auto;max-width:42ch;text-align:right;}
+  @media(max-width:760px){.stage-sub{display:none;}}
+  .stage-bar{display:inline-block;width:34px;height:4px;border-radius:3px;background:var(--stage);margin-bottom:2px;}
+
+  .proj-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;}
+  .proj{
+    position:relative;background:var(--paper-2);border:1px solid var(--line);
+    border-radius:14px;padding:22px 22px 20px;overflow:hidden;
+    transition:transform .2s, box-shadow .2s, border-color .2s;
+  }
+  .proj::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--stage);}
+  .proj:hover{transform:translateY(-3px);border-color:var(--stage);box-shadow:0 18px 38px -26px rgba(27,27,47,.5);}
+  .proj .dataset{font-family:var(--mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--stage);margin-bottom:7px;}
+  .proj h4{font-family:var(--display);font-weight:600;font-size:1.18rem;margin:0 0 9px;letter-spacing:-.01em;}
+  .proj p{font-size:.96rem;color:var(--ink-soft);margin:0 0 14px;}
+  .proj .tags{display:flex;flex-wrap:wrap;gap:6px;}
+  .tag{font-family:var(--mono);font-size:.68rem;color:var(--muted);border:1px solid var(--line);padding:3px 8px;border-radius:5px;}
+  .proj.wide{grid-column:1/-1;}
+  @media(max-width:680px){.proj-grid{grid-template-columns:1fr;}}
+
+  /* ---------- footer ---------- */
+  footer{background:var(--ink);color:#EDECF6;padding:64px 0 48px;}
+  footer .wrap{display:grid;grid-template-columns:1.3fr 1fr;gap:40px;align-items:end;}
+  footer h2{font-family:var(--display);font-weight:600;font-size:clamp(1.8rem,4vw,2.6rem);margin:0 0 14px;line-height:1.08;}
+  footer h2 em{font-style:italic;color:#B9AEF7;}
+  footer p{color:#A9A8C4;margin:0;max-width:40ch;}
+  .foot-links{display:flex;flex-direction:column;gap:11px;font-family:var(--mono);font-size:.84rem;}
+  .foot-links a,.foot-links span{display:flex;align-items:center;gap:10px;color:#D9D8EC;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.09);transition:color .2s,padding-left .2s;}
+  .foot-links a:hover{color:#fff;padding-left:6px;}
+  .foot-links .ic{color:#8E84D8;width:16px;text-align:center;}
+  .foot-base{border-top:1px solid rgba(255,255,255,.1);margin-top:40px;padding-top:22px;font-family:var(--mono);font-size:.72rem;color:#7E7CA0;letter-spacing:.04em;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+  @media(max-width:720px){footer .wrap{grid-template-columns:1fr;gap:28px;}}
+
+  /* ---------- program stages (compact) ---------- */
+  .pstage{background:var(--paper-2);border:1px solid var(--line);border-radius:16px;padding:26px 28px 24px;margin-bottom:18px;position:relative;overflow:hidden;}
+  .pstage.done::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--st);}
+  .pstage.upcoming{background:transparent;border-style:dashed;}
+  .pstage-top{display:flex;align-items:center;gap:16px;flex-wrap:wrap;}
+  .pstage-id{display:flex;align-items:center;gap:11px;}
+  .pstage-id .stage-bar{margin:0;}
+  .pstage-name{font-family:var(--display);font-weight:600;font-size:1.3rem;letter-spacing:-.01em;margin:0;}
+  .pstage-name.muted,.stage-no.muted{color:var(--muted);}
+  .stage-bar.ghost{background:var(--line);}
+  .pill{margin-left:auto;font-family:var(--mono);font-size:.7rem;letter-spacing:.05em;padding:5px 13px;border-radius:20px;white-space:nowrap;}
+  .done-pill{background:var(--violet);color:#fff;}
+  .soon-pill{background:var(--violet-soft);color:var(--violet);}
+  .next-pill{background:#EEEDF5;color:var(--ink-soft);border:1px solid var(--line);}
+  .pstage-lead{color:var(--ink-soft);font-size:1rem;margin:12px 0 24px;max-width:64ch;}
+  .pstage.upcoming .pstage-lead{margin-bottom:2px;}
+  .themes{display:grid;grid-template-columns:1fr 1fr;gap:28px 44px;}
+  .theme-label{display:flex;align-items:center;gap:9px;font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink);margin-bottom:6px;}
+  .theme-label i{width:9px;height:9px;border-radius:50%;background:var(--t);flex:none;}
+  .tlist{display:flex;flex-direction:column;}
+  .tline{padding:8px 0;border-bottom:1px dashed var(--line);font-size:.93rem;line-height:1.45;color:var(--ink-soft);}
+  .tline .ds{color:var(--ink);font-weight:600;}
+  .tline .dd{color:var(--ink-soft);}
+  @media(max-width:760px){.themes{grid-template-columns:1fr;gap:24px;}}
+
+  /* Stage 4 upcoming tracks */
+  .tracks{margin-top:4px;}
+  .track-row{padding:14px 0;border-bottom:1px dashed var(--line);}
+  .track-row:last-child{border-bottom:0;padding-bottom:2px;}
+  .track-row .tname{display:block;font-family:var(--mono);font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:10px;}
+
+  /* ---------- reveal animation ---------- */
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease, transform .7s ease;}
+  .reveal.in{opacity:1;transform:none;}
+  @media(prefers-reduced-motion:reduce){
+    .reveal{opacity:1;transform:none;transition:none;}
+    html{scroll-behavior:auto;}
+  }
+  :focus-visible{outline:2px solid var(--violet);outline-offset:3px;border-radius:4px;}
+</style>
+</head>
+<body>
+
+<!-- ===== top bar ===== -->
+<header class="topbar">
+  <div class="wrap">
+    <div class="brand">Lama&nbsp;<b>Alamoudi</b></div>
+    <nav class="navlinks">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#journey">Labs</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ===== hero ===== -->
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <div class="hero-kicker">
+        <span class="dot"></span>
+        <span class="eyebrow">KAUST Academy · AI Specialization Track</span>
+      </div>
+      <h1>
+        <span class="ln">Lama Mohammed</span>
+        <span class="ln">Hassan <span class="accent">Alamoudi</span></span>
+      </h1>
+      <div class="role">
+        <span>Computer Science Graduate</span> — First in Class of 2025<br>
+        Building machine learning that solves real problems.
+      </div>
+      <p class="lead">
+        This site documents my progress through KAUST Academy's selective Artificial
+        Intelligence track — the skills I'm building and the projects I complete at each stage.
+      </p>
+      <div class="cta-row">
+        <a class="btn btn-solid" href="#journey">See the labs</a>
+        <a class="btn btn-ghost" href="#contact">Get in touch</a>
+      </div>
+    </div>
+
+    <!-- signature: portrait at the centre of its own embedding -->
+    <div class="embed" aria-hidden="true">
+      <svg viewBox="0 0 500 500" id="embedSvg">
+        <g id="links" stroke-width="1" fill="none"></g>
+        <g id="dots"></g>
+      </svg>
+      <div class="portrait">
+        <!-- ADD YOUR PHOTO: save your image as "photo.jpg" next to this file (or change the filename below).
+             Until then, the "LA" monogram shows automatically. -->
+        <img src="Images/photo.jpg" alt="Lama Alamoudi" class="portrait-img" onerror="this.remove()">
+        <span>LA</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== about ===== -->
+<section class="about" id="about">
+  <div class="wrap">
+    <div class="about-meta reveal">
+      <div><span class="k">Role</span><span class="v">CS Graduate, AI</span></div>
+      <div><span class="k">Class of</span><span class="v">2025 — ranked 1st</span></div>
+      <div><span class="k">Program</span><span class="v">KAUST Academy AI Specialization</span></div>
+      <div><span class="k">Completion</span><span class="v">September 2026 (predicted)</span></div>
+    </div>
+    <div class="about-body reveal">
+      <span class="eyebrow">About me</span>
+      <p style="margin-top:14px;">
+        I'm a <strong>Computer Science graduate, first in the Class of 2025</strong>. This achievement
+        was driven by a genuine curiosity to figure out how things work and a commitment to learning.
+        I enjoy every side of technology, but my real passion is <strong>Artificial Intelligence</strong>.
+      </p>
+      <p>
+        I'm fascinated by how AI can solve real-world problems, something I got to experience firsthand
+        through my graduation project, <strong>Ameneen</strong>: a real-time emergency detection system for
+        Hajj and Umrah pilgrims, built using deep learning, Apache Kafka, and Android development.
+      </p>
+      <p>
+        I like to keep sharpening my skills, which is why I'm currently part of
+        <strong>KAUST Academy's selective AI specialization program</strong>, which I will complete in
+        September 2026. I'm always looking for new challenges, and I'm excited to find a place where I can grow,
+        share my knowledge, and build solutions that make a real difference.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== skills ===== -->
+<section id="skills">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">What I learned</span>
+      <h2>Skills, grouped</h2>
+      <p>Organized the way the track is — a strong data foundation first, then classical ML,
+         deep learning, and computer vision, where I can build a model from scratch or fine-tune a ready one.</p>
+    </div>
+    <div class="skill-grid">
+
+      <div class="skill-card wide reveal"><div class="num">01</div><h3>Data preparation &amp; EDA</h3>
+        <p class="sc-note">My strongest foundation — the same careful prep before every model, for both tabular data and images. The groundwork that makes results reliable.</p>
+        <div class="chips"><span class="chip">exploratory analysis (EDA)</span><span class="chip">handling missing values</span><span class="chip">encoding — label / one-hot</span><span class="chip">scaling — standard / min-max</span><span class="chip">stratified train/test split</span><span class="chip">outliers &amp; duplicates</span><span class="chip">custom Dataset classes / ImageFolder classes</span><span class="chip">DataLoaders</span><span class="chip">image augmentation &amp; transforms</span></div></div>
+
+      <div class="skill-card reveal"><div class="num">02</div><h3>Classical machine learning</h3>
+        <p class="sc-note">Implementing core algorithms from scratch to master the foundational math, and utilizing production-ready libraries to solve complex tabular data problems.</p>
+        <div class="chips"><span class="chip">regression · binary · multiclass problems</span><span class="chip">scikit-learn ready models</span><span class="chip">linear &amp; logistic regression (from scratch)</span><span class="chip">Ridge / LASSO</span><span class="chip">KNN</span><span class="chip">SVM / SVR</span><span class="chip">decision trees (classifier &amp; regressor)</span><span class="chip">Random Forest (classifier &amp; regressor)</span><span class="chip">gradient boosting — XGBoost · LightGBM · CatBoost</span></div></div>
+
+      <div class="skill-card reveal"><div class="num">03</div><h3>Deep learning · PyTorch</h3>
+        <p class="sc-note">Building and training networks — from scratch or with a pretrained model.</p>
+        <div class="chips"><span class="chip">custom nn.Module networks — define layers &amp; forward pass from scratch</span><span class="chip">CNNs</span><span class="chip">training &amp; validation loops</span><span class="chip">optimizers — Adam / AdamW</span><span class="chip">losses — CrossEntropy · MSE · L1</span><span class="chip">GPU Acceleration (CUDA)</span></div></div>
+
+      <div class="skill-card reveal"><div class="num">04</div><h3>Computer vision</h3>
+        <p class="sc-note">Applying deep learning to images through custom-built networks or fine-tuning state-of-the-art models.</p>
+        <div class="chips"><span class="chip">Image Classification</span><span class="chip">Semantic Segmentation</span><span class="chip">Object Detection</span><span class="chip">Content-Based Image Retrieval (Image Search — embeddings + PCA)</span><span class="chip">Fine-tuning &amp; Transfer Learning (Backbone Freezing, Head Swapping)</span><span class="chip">Custom CNN Architecture Design</span><span class="chip">SOTA Backbones — ResNet · EfficientNet · U-Net (Custom &amp; SMP) · YOLO · Faster R-CNN · AlexNet</span></div></div>
+
+      <div class="skill-card reveal"><div class="num">05</div><h3>Unsupervised learning</h3>
+        <p class="sc-note">Finding hidden structures and patterns in data without using labels.</p>
+        <div class="chips"><span class="chip">dimensionality reduction — PCA · t-SNE</span><span class="chip">clustering — K-Means</span><span class="chip">autoencoders</span></div></div>
+
+      <div class="skill-card reveal"><div class="num">06</div><h3>Evaluation &amp; tools</h3>
+        <p class="sc-note">Measuring model performance precisely, utilizing my core everyday development stack.</p>
+        <div class="chips"><span class="chip">Regression: R² · MSE · MAE</span><span class="chip">Classification: accuracy · F1 · confusion matrix</span><span class="chip">Detection: mAP</span><span class="chip">Python</span><span class="chip">scikit-learn</span><span class="chip">PyTorch</span><span class="chip">torchvision</span><span class="chip">pandas</span><span class="chip">NumPy</span><span class="chip">matplotlib</span><span class="chip">Google Colab</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== journey / projects ===== -->
+<section id="journey">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Hands-on work</span>
+      <h2>Progress, stage by stage</h2>
+      <p>The track runs in stages. Here's where I am — Stages 2 and 3 complete and summarized below,
+         with the Summer 2026 stage ahead.</p>
+    </div>
+
+    <!-- STAGE 2 : completed, summarized -->
+    <div class="pstage done reveal" style="--st:var(--c1)">
+      <div class="pstage-top">
+        <span class="pstage-id"><span class="stage-bar"></span><span class="stage-no">STAGE 02</span></span>
+        <h3 class="pstage-name">Machine learning &amp; deep learning foundations</h3>
+        <span class="pill done-pill">Completed</span>
+      </div>
+      <p class="pstage-lead">Hands-on labs across classical ML, neural networks and unsupervised learning —
+        each taken through the full workflow: prepare the data, build and train a model, then evaluate it.
+        Plus graded assessments.</p>
+
+      <div class="themes">
+        <div class="theme" style="--t:var(--c1)">
+          <div class="theme-label"><i></i>Classical ML · scikit-learn</div>
+          <div class="tlist">
+            <div class="tline"><span class="ds">Student Habits</span> — <span class="dd">predict exam score · regression</span></div>
+            <div class="tline"><span class="ds">Used Cars</span> — <span class="dd">predict price · regression</span></div>
+            <div class="tline"><span class="ds">Advertising</span> — <span class="dd">predict sales · regression</span></div>
+            <div class="tline"><span class="ds">Campus Placement</span> — <span class="dd">classify placed / not placed · binary</span></div>
+            <div class="tline"><span class="ds">Air Quality</span> — <span class="dd">classify Good / Moderate / Poor / Hazardous · multiclass</span></div>
+          </div>
+        </div>
+
+        <div class="theme" style="--t:var(--c2)">
+          <div class="theme-label"><i></i>Deep learning · PyTorch</div>
+          <div class="tlist">
+            <div class="tline"><span class="ds">Weather Type</span> — <span class="dd">classify Rainy / Sunny / Cloudy / Snowy · multiclass</span></div>
+            <div class="tline"><span class="ds">Diamonds</span> — <span class="dd">predict price · regression</span></div>
+            <div class="tline"><span class="ds">MNIST</span> — <span class="dd">classify digits 0–9 · multiclass</span></div>
+            <div class="tline"><span class="ds">CIFAR-10</span> — <span class="dd">classify 10 image categories · multiclass</span></div>
+          </div>
+        </div>
+
+        <div class="theme" style="--t:var(--c3)">
+          <div class="theme-label"><i></i>Unsupervised learning</div>
+          <div class="tlist">
+            <div class="tline"><span class="ds">MNIST subset</span> — <span class="dd">reduce, cluster &amp; regenerate digits · PCA · t-SNE · K-Means · autoencoders</span></div>
+          </div>
+        </div>
+
+        <div class="theme" style="--t:var(--c4)">
+          <div class="theme-label"><i></i>Graded assessments</div>
+          <div class="tlist">
+            <div class="tline"><span class="ds">Food Delivery</span> — <span class="dd">predict delivery time · regression</span></div>
+            <div class="tline"><span class="ds">Face Images</span> — <span class="dd">predict age from photo · image regression</span></div>
+            <div class="tline"><span class="ds">Amex Credit Default</span> — <span class="dd">classify default / no default · binary</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STAGE 3 : completed, computer vision -->
+    <div class="pstage done reveal" style="--st:var(--c2)">
+      <div class="pstage-top">
+        <span class="pstage-id"><span class="stage-bar"></span><span class="stage-no">STAGE 03</span></span>
+        <h3 class="pstage-name">Computer vision &amp; transfer learning</h3>
+        <span class="pill done-pill">Completed</span>
+      </div>
+      <p class="pstage-lead">Working with images in PyTorch — building CNNs and U-Nets from scratch,
+        and fine-tuning pretrained models (ResNet, EfficientNet, YOLO) for classification, search,
+        segmentation and detection.</p>
+
+      <div class="themes">
+        <div class="theme" style="--t:var(--c1)">
+          <div class="theme-label"><i></i>Image classification — CNNs from scratch</div>
+          <div class="tlist">
+            <div class="tline"><span class="ds">Fashion-MNIST</span> — <span class="dd">classify clothing items, CNN built from scratch · multiclass</span></div>
+            <div class="tline"><span class="ds">CIFAR-10</span> — <span class="dd">classify 10 categories, CNN &amp; AlexNet built from scratch · multiclass</span></div>
+            <div class="tline"><span class="ds">Flowers Recognition</span> — <span class="dd">build a custom Dataset class &amp; image augmentation</span></div>
+            <div class="tline"><span class="ds">Skin Cancer (ISIC)</span> — <span class="dd">custom Dataset class &amp; augmentation — a different data structure</span></div>
+            <div class="tline"><span class="ds">Smoking</span> — <span class="dd">custom Dataset class &amp; augmentation — a different data structure</span></div>
+            <div class="tline"><span class="ds">Horse Breeds</span> — <span class="dd">custom Dataset class &amp; augmentation — a different data structure</span></div>
+          </div>
+        </div>
+
+        <div class="theme" style="--t:var(--c2)">
+          <div class="theme-label"><i></i>Transfer learning &amp; search</div>
+          <div class="tlist">
+            <div class="tline"><span class="ds">Cats &amp; Dogs</span> — <span class="dd">classify cat / dog by fine-tuning EfficientNet-B0 · binary</span></div>
+            <div class="tline"><span class="ds">Smoking Detection</span> — <span class="dd">classify smoking / not smoking by fine-tuning a pretrained ResNet · binary</span></div>
+            <div class="tline"><span class="ds">CIFAR-10 (VGG)</span> — <span class="dd">classify 10 categories with a pretrained VGG · multiclass</span></div>
+            <div class="tline"><span class="ds">Caltech-101</span> — <span class="dd">image search with EfficientNetV2 features + PCA</span></div>
+          </div>
+        </div>
+
+        <div class="theme" style="--t:var(--c3)">
+          <div class="theme-label"><i></i>Object detection</div>
+          <div class="tlist">
+            <div class="tline"><span class="ds">Pascal VOC</span> — <span class="dd">detect objects with a pretrained Faster R-CNN (boxes, mAP)</span></div>
+            <div class="tline"><span class="ds">Wind Turbines</span> — <span class="dd">detect with YOLOv8 — train &amp; run inference</span></div>
+          </div>
+        </div>
+
+        <div class="theme" style="--t:var(--c4)">
+          <div class="theme-label"><i></i>Image segmentation · U-Net</div>
+          <div class="tlist">
+            <div class="tline"><span class="ds">Oxford-IIIT Pets</span> — <span class="dd">segment pets with a custom U-Net (residual) · multiclass</span></div>
+            <div class="tline"><span class="ds">Flood Areas</span> — <span class="dd">segment water with a pretrained-encoder U-Net (SMP) · binary</span></div>
+            <div class="tline"><span class="ds">Brain MRI</span> — <span class="dd">segment tumors with a pretrained U-Net · binary</span></div>
+          </div>
+        </div>
+
+        <div class="theme" style="--t:var(--c1)">
+          <div class="theme-label"><i></i>Graded assessments</div>
+          <div class="tlist">
+            <div class="tline"><span class="ds">EMNIST Letters</span> — <span class="dd">classify 26 letters by fine-tuning EfficientNetV2-S · transfer learning</span></div>
+            <div class="tline"><span class="ds">Potato Disease (PlantVillage)</span> — <span class="dd">classify leaf disease into 3 classes with a CNN · multiclass</span></div>
+            <div class="tline"><span class="ds">Underwater (SUIM)</span> — <span class="dd">segment into 8 classes with a pretrained U-Net · multiclass</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STAGE 4 : upcoming summer program -->
+    <div class="pstage upcoming reveal">
+      <div class="pstage-top">
+        <span class="pstage-id"><span class="stage-bar ghost"></span><span class="stage-no muted">STAGE 04</span></span>
+        <h3 class="pstage-name muted">KAUST Academy AI — Summer 2026</h3>
+        <span class="pill next-pill">Begins June 28, 2026</span>
+      </div>
+      <p class="pstage-lead">The summer program goes deeper into modern AI across three tracks. Here's what's ahead:</p>
+
+      <div class="tracks">
+        <div class="track-row">
+          <span class="tname">Computer Vision</span>
+          <div class="chips"><span class="chip">CNNs &amp; Vision Transformers (ViT)</span><span class="chip">generative models — autoencoders · VAEs · GANs · diffusion</span><span class="chip">object detection</span><span class="chip">image captioning</span><span class="chip">self-supervised learning</span></div>
+        </div>
+        <div class="track-row">
+          <span class="tname">Natural Language Processing</span>
+          <div class="chips"><span class="chip">text preprocessing &amp; embeddings (GloVe)</span><span class="chip">RNNs · LSTM · GRU</span><span class="chip">attention &amp; Transformers</span><span class="chip">BERT · T5</span><span class="chip">large language models</span><span class="chip">fine-tuning (QLoRA) &amp; RAG</span></div>
+        </div>
+        <div class="track-row">
+          <span class="tname">Reinforcement Learning</span>
+          <div class="chips"><span class="chip">Q-learning · DQN</span><span class="chip">policy gradients — REINFORCE · PPO</span><span class="chip">actor-critic — SAC · DDPG</span><span class="chip">robotics control</span></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== footer / contact ===== -->
+<footer id="contact">
+  <div class="wrap">
+    <div>
+      <span class="eyebrow" style="color:#B9AEF7;">Contact</span>
+      <h2>Let's build something <em>that matters.</em></h2>
+      <p>Open to roles and collaborations in AI and machine learning. The fastest way to reach me is by email or by using the phone number</p>
+    </div>
+    <div class="foot-links">
+      <a href="mailto:lamauniversity32@gmail.com"><span class="ic">✉</span> lamauniversity32@gmail.com</a>
+      <a href="https://www.linkedin.com/in/lama-amoudi" target="_blank" rel="noopener"><span class="ic">in</span> linkedin.com/in/lama-amoudi</a>
+      <a href="tel:+966552561463"><span class="ic">☎</span> +966 55 256 1463</a>
+      <span><span class="ic">⌖</span> Madinah Al Munawwarah, KSA</span>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="foot-base">
+      <span>Lama Mohammed Hassan Alamoudi</span>
+      <span>KAUST Academy · AI Specialization Track</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---- build the embedding scatter ---- */
+  var dots = document.getElementById('dots');
+  var links = document.getElementById('links');
+  if(dots){
+    var clusters = [
+      {x:135, y:140, c:'var(--c1)'},
+      {x:368, y:150, c:'var(--c2)'},
+      {x:145, y:368, c:'var(--c3)'},
+      {x:360, y:362, c:'var(--c4)'}
+    ];
+    var cx=250, cy=250;
+    function rnd(a,b){return a+Math.random()*(b-a);}
+    clusters.forEach(function(cl,ci){
+      // faint link from centre to each cluster centroid
+      var ln=document.createElementNS('http://www.w3.org/2000/svg','line');
+      ln.setAttribute('x1',cx);ln.setAttribute('y1',cy);
+      ln.setAttribute('x2',cl.x);ln.setAttribute('y2',cl.y);
+      ln.setAttribute('stroke',cl.c);ln.setAttribute('stroke-opacity','0.22');
+      links.appendChild(ln);
+      var n=13;
+      for(var i=0;i<n;i++){
+        var ang=Math.random()*Math.PI*2, rad=Math.pow(Math.random(),0.7)*46;
+        var px=cl.x+Math.cos(ang)*rad, py=cl.y+Math.sin(ang)*rad;
+        var d=document.createElementNS('http://www.w3.org/2000/svg','circle');
+        d.setAttribute('cx',px);d.setAttribute('cy',py);
+        d.setAttribute('r',rnd(2.4,5.2).toFixed(1));
+        d.setAttribute('fill',cl.c);
+        d.setAttribute('fill-opacity',rnd(0.45,0.95).toFixed(2));
+        if(!reduce){
+          // start scattered toward centre, then settle into the cluster
+          var dx=(cx-px)*rnd(.5,1.1), dy=(cy-py)*rnd(.5,1.1);
+          d.style.transform='translate('+dx+'px,'+dy+'px)';
+          d.style.opacity='0';
+          d.style.transition='transform 1.1s cubic-bezier(.16,.84,.34,1) '+(ci*120+i*22)+'ms, opacity .8s ease '+(ci*120+i*22)+'ms';
+        }
+        dots.appendChild(d);
+      }
+    });
+    if(!reduce){
+      requestAnimationFrame(function(){requestAnimationFrame(function(){
+        dots.querySelectorAll('circle').forEach(function(d){d.style.transform='translate(0,0)';d.style.opacity='';});
+      });});
+    }
+  }
+
+  /* ---- scroll reveal ---- */
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+  },{threshold:.14, rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
+})();
+</script>
+</body>
+</html>
