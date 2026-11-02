@@ -222,7 +222,8 @@
   /* ---------- program stages (compact) ---------- */
   .pstage{background:var(--paper-2);border:1px solid var(--line);border-radius:16px;padding:26px 28px 24px;margin-bottom:18px;position:relative;overflow:hidden;}
   .pstage.done::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--st);}
-  .pstage.upcoming{background:transparent;border-style:dashed;}
+  .pstage.upcoming{background:var(--paper-2);border-style:solid;}
+  .pstage.upcoming::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--c3);}
   .pstage-top{display:flex;align-items:center;gap:16px;flex-wrap:wrap;}
   .pstage-id{display:flex;align-items:center;gap:11px;}
   .pstage-id .stage-bar{margin:0;}
@@ -337,7 +338,7 @@
         Hajj and Umrah pilgrims, built using deep learning, Apache Kafka, and Android development.
       </p>
       <p>
-        I like to keep sharpening my skills, which is why I'm currently part of
+        I like to keep sharpening my skills, which is why I was a part of
         <strong>KAUST Academy's selective AI specialization program</strong>, which I will complete in
         September 2026. I'm always looking for new challenges, and I'm excited to find a place where I can grow,
         share my knowledge, and build solutions that make a real difference.
@@ -508,13 +509,12 @@
     </div>
 
     <!-- STAGE 4 : upcoming summer program -->
-    <div class="pstage upcoming reveal">
+    <div class="pstage upcoming reveal" style="--st:var(--c3)">
       <div class="pstage-top">
-        <span class="pstage-id"><span class="stage-bar ghost"></span><span class="stage-no muted">STAGE 04</span></span>
-        <h3 class="pstage-name muted">KAUST Academy AI — Summer 2026</h3>
-        <span class="pill next-pill">Begins June 28, 2026</span>
+        <span class="pstage-id"><span class="stage-bar" style="background:var(--c3)"></span><span class="stage-no" style="color:var(--c3)">STAGE 04</span></span>
+        <h3 class="pstage-name">KAUST Academy AI — Summer 2026</h3>
+        <span class="pill soon-pill">June 28, 2026</span>
       </div>
-      <p class="pstage-lead">The summer program goes deeper into modern AI across three tracks. Here's what's ahead:</p>
 
       <div class="tracks">
         <div class="track-row">
